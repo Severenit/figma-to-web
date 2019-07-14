@@ -1,0 +1,11 @@
+{
+	"name": "figma-to-style",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"dotenv": "^8.0.0",
+		"node-fetch": "^2.6.0",
+		"node-sass": "^4.12.0",
+		"style-dictionary": "^2.8.1"
+	}
+}
