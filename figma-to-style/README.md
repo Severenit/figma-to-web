@@ -1,5 +1,5 @@
 # Figma to Style
-##Introduction
+## Introduction
 
 First, you have to put your access token key in `.env `
 
