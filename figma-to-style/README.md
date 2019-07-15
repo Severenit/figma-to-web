@@ -15,12 +15,12 @@ yarn install
 ```
 
 Then, you should run the script and you will need a file key.
-The file key can be parsed from any Figma file url: `https://www.figma.com/file/${key}/${title}`.
+The file key can be parsed from any Figma file url: `https://www.figma.com/file/${file_key}/${title}`.
 
 Run command in terminal
 
 ```
-node main.js ${key}
+node main.js ${file_key}
 ```
 Wait for the script to finish...
 
@@ -32,7 +32,7 @@ If you work in Figma with a big team, and you have team styles, you can take the
 The teams key can be parsed from any Figma team url: `https://www.figma.com/files/team/${teams_key}/${title}`
 
 ```
-node main.js ${key} teams
+node main.js ${teams_key} teams
 ```
 
 #### Version
