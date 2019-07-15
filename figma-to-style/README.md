@@ -29,6 +29,7 @@ In root directory you can see file `variables.css`
 ## Options
 
 If you work in Figma with a big team, and you have team styles, you can take them.
+The teams key can be parsed from any Figma file url: `https://www.figma.com/files/team/${teams_key}/${title}`
 
 ```
 node main.js ${key} teams
