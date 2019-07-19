@@ -24,7 +24,7 @@ node main.js ${file_key}
 ```
 Wait for the script to finish...
 
-In root directory you can see file `variables.css`
+In root directory you can see folder `build` where are the generated `css` and `scss` files.
 
 ## Options
 
@@ -34,6 +34,20 @@ The teams key can be parsed from any Figma team url: `https://www.figma.com/file
 ```
 node main.js ${teams_key} teams
 ```
+
+If your Figma file has a "node element" with "spacers geometry", you can also add them to generate styles.
+
+```
+node main.js ${file_key} file spacers=${node_id}
+```
+
+> The node_id key can be parsed from any Figma team url: `https://www.figma.com/file/${file_key}/${title}?node-id=${node_id}`
+
+If you want to customize more accurate style generation and not only on `Web` but also `iOS` and `Android`.
+
+Change the configuration in the file `config.json`
+
+Read more about all possible settings here in [Style Dictionary](https://amzn.github.io/style-dictionary/#/README)
 
 #### Version
 ```
