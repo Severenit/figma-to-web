@@ -4,12 +4,13 @@ const headers = new fetch.Headers();
 const devToken = process.env.DEV_TOKEN;
 headers.append('X-Figma-Token', devToken);
 
-const type = process.argv[3] || 'files';
+let type = process.argv[3] || 'files';
 
 const getFiles = require('./get-files.js');
 const getTeamsStyle = require('./get-teams-style.js')
 const getFontStyles = require('./get-font-styles.js');
 const getColorPlatte = require('./get-color-platte.js');
+const getGrids = require('./get-grids.js');
 
 module.exports = async function (key, URLformat) {
 	let figmaTreeStructure;
@@ -29,10 +30,18 @@ module.exports = async function (key, URLformat) {
 	const stylesArr = Array.isArray(styles) ? styles : Object.keys(styles);
 
 	const baseTokeensJSON = {
-		grids: {},
-		spacers: {},
 		color: {},
-		font: {}
+		size: {
+			font: {},
+			grids: {}
+		},
+		font: {
+			family: {},
+			weight: {},
+			spacing: {},
+			lineheight: {}
+		},
+		grids: {}
 	};
 
 	for (const item of stylesArr) {
@@ -48,7 +57,12 @@ module.exports = async function (key, URLformat) {
 				node_id: node_id,
 				file_key: figmaId
 			}, URLformat);
-			Object.assign(baseTokeensJSON.font, fonts);
+
+			Object.assign(baseTokeensJSON.size.font, fonts.size.font);
+			Object.assign(baseTokeensJSON.font.family, fonts.font.family);
+			Object.assign(baseTokeensJSON.font.weight, fonts.font.weight);
+			Object.assign(baseTokeensJSON.font.spacing, fonts.font.spacing);
+			Object.assign(baseTokeensJSON.font.lineheight, fonts.font.lineheight);
 		}
 
 		if (styleType === 'FILL') {
@@ -57,6 +71,15 @@ module.exports = async function (key, URLformat) {
 				file_key: figmaId
 			}, URLformat);
 			Object.assign(baseTokeensJSON.color, color);
+		}
+
+		if (styleType === 'GRID') {
+			const grids = await getGrids({
+				node_id: node_id,
+				file_key: figmaId
+			}, URLformat);
+			Object.assign(baseTokeensJSON.size.grids, grids.size.grids);
+			Object.assign(baseTokeensJSON.grids, grids.grids);
 		}
 	}
 

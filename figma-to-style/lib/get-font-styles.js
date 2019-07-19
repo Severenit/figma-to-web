@@ -7,35 +7,44 @@ module.exports = async function (item, URLformat) {
 	const {
 		document
 	} = figmaTreeStructure;
-
-	console.log(naming(document.name) ,' - ', document.type);
-
 	return {
-		[naming(document.name)]: {
+		size: {
+			font: {
+				[naming(document.name)]: {
+					value: document.style.fontSize,
+					type: "typography"
+				}
+			}
+		},
+		font: {
 			family: {
-				value: `${document.style.fontFamily}, ${
-					document.style.fontPostScriptName
-					}`,
-				type: "typography"
-			},
-			size: {
-				value: document.style.fontSize,
-				type: "typography"
+				[naming(document.name)]: {
+					value: `${document.style.fontFamily}, ${
+						document.style.fontPostScriptName
+						}`,
+					type: "typography"
+				}
 			},
 			weight: {
-				value: document.style.fontWeight,
-				type: "typography"
+				[naming(document.name)]: {
+					value: document.style.fontWeight,
+					type: "typography"
+				}
 			},
 			lineheight: {
-				value: `${document.style.lineHeightPercent}%`,
-				type: "typography"
+				[naming(document.name)]: {
+					value: `${document.style.lineHeightPercent}%`,
+					type: "typography"
+				}
 			},
 			spacing: {
-				value:
-					document.style.letterSpacing !== 0
-						? `${document.style.letterSpacing}px`
-						: "normal",
-				type: "typography"
+				[naming(document.name)]: {
+					value:
+						document.style.letterSpacing !== 0
+							? `${document.style.letterSpacing}px`
+							: "normal",
+					type: "typography"
+				}
 			}
 		}
 	};
