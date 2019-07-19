@@ -38,7 +38,7 @@ node main.js ${teams_key} teams
 If your Figma file has a "node element" with "spacers geometry", you can also add them to generate styles.
 
 ```
-node main.js ${file_key} file spacers=${node_id}
+node main.js ${file_key} files spacers=${node_id}
 ```
 
 > The node_id key can be parsed from any Figma team url: `https://www.figma.com/file/${file_key}/${title}?node-id=${node_id}`
