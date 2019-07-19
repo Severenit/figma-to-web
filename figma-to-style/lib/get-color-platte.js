@@ -12,7 +12,6 @@ module.exports = async function(item, URLformat) {
 		document
 	} = figmaTreeStructure;
 
-	console.log(naming(document.name) ,' - ', document.type);
 	return {
 		[naming(document.name)]: {
 			value: rgba(document.fills[0].color),
