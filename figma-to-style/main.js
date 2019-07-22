@@ -13,7 +13,7 @@ const fileKey = process.argv[2];
 const type = process.argv[4];
 const spacerArg = process.argv[4];
 let spacersId;
-if (spacerArg.indexOf('spacers') !== -1) {
+if (spacerArg && spacerArg.indexOf('spacers') !== -1) {
 	spacersId = spacerArg.slice(spacerArg.indexOf('=')+1, spacerArg.length);
 }
 
