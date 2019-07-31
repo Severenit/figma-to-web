@@ -11,6 +11,7 @@ const getTeamsStyle = require('./get-teams-style.js')
 const getFontStyles = require('./get-font-styles.js');
 const getColorPlatte = require('./get-color-platte.js');
 const getGrids = require('./get-grids.js');
+const getEffect = require('./get-effect.js');
 
 module.exports = async function (key, URLformat) {
 	let figmaTreeStructure;
@@ -41,7 +42,8 @@ module.exports = async function (key, URLformat) {
 			spacing: {},
 			lineheight: {}
 		},
-		grids: {}
+		grids: {},
+		effects: {}
 	};
 
 	for (const item of stylesArr) {
@@ -80,6 +82,15 @@ module.exports = async function (key, URLformat) {
 			}, URLformat);
 			Object.assign(baseTokeensJSON.size.grids, grids.size.grids);
 			Object.assign(baseTokeensJSON.grids, grids.grids);
+		}
+
+		if (styleType === 'EFFECT') {
+			const effect = await getEffect({
+				node_id: node_id,
+				file_key: figmaId
+			}, URLformat);
+
+			Object.assign(baseTokeensJSON.effects, effect);
 		}
 	}
 

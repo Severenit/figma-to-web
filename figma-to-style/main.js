@@ -1,6 +1,7 @@
 require('dotenv').config()
 const fetch = require('node-fetch');
 const fs = require('fs');
+const shell = require('shelljs');
 const StyleDictionary = require('style-dictionary').extend('./config.json');
 
 const getStylesArtboard = require('./lib/get-styles-artboard.js');
@@ -13,7 +14,7 @@ const fileKey = process.argv[2];
 const type = process.argv[4];
 const spacerArg = process.argv[4];
 let spacersId;
-if (spacerArg.indexOf('spacers') !== -1) {
+if (spacerArg && spacerArg.indexOf('spacers') !== -1) {
 	spacersId = spacerArg.slice(spacerArg.indexOf('=')+1, spacerArg.length);
 }
 
@@ -42,13 +43,15 @@ async function main() {
 		}
 	}
 
+	shell.exec('rm -rf ./json/token.json');
 	const pathWriteFile = `./json/token.json`;
 
 	fs.writeFile(pathWriteFile, JSON.stringify(result), (err) => {
 		if (err) console.log(err);
+		StyleDictionary.cleanAllPlatforms();
 		console.log(`> Ok, we finish! And wrote file ${pathWriteFile}`);
 		console.log('> Now, we will compile the styles for you! -->');
-		StyleDictionary.buildAllPlatforms();
+		shell.exec('style-dictionary build');
 	});
 }
 

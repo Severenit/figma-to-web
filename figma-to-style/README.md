@@ -1,7 +1,13 @@
 # Figma to Style
 ## Introduction
 
-First, you have to put your access token key in `.env `
+First, you should create a `.env ` file, where you write access token key
+
+```sh
+cp .env.example .env
+```
+
+Then change `<YOUR_TOKEN>` in `.env` file to your personal access token key
 
 Token key you can take in [this](https://www.figma.com/developers/docs#authentication).
 You can create a temporary access token by clicking right there on `Get personal access token` or read how to make permanent access token.
@@ -38,7 +44,7 @@ node main.js ${teams_key} teams
 If your Figma file has a "node element" with "spacers geometry", you can also add them to generate styles.
 
 ```
-node main.js ${file_key} file spacers=${node_id}
+node main.js ${file_key} files spacers=${node_id}
 ```
 
 > The node_id key can be parsed from any Figma team url: `https://www.figma.com/file/${file_key}/${title}?node-id=${node_id}`
